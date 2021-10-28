@@ -25,29 +25,16 @@ public:
             g_doubleData[i] = (rand() + 1) * 0.0001f;
         }
     }
-
-
-// eigen version
-    void calcEigenCasualFloat(){
-        auto dataMatrix = Eigen::MatrixXf::Map(g_floatData, 6, SAMPLE_COUNT/6);
-        Eigen::MatrixXf quart = dataMatrix.adjoint() * dataMatrix;
-        quart.inverse();
-    }
-
-    void calcEigenCasualDouble(){
-        auto dataMatrix = Eigen::MatrixXd::Map(g_doubleData, 6, SAMPLE_COUNT/6);
-        Eigen::MatrixXd quart = dataMatrix.adjoint() * dataMatrix;
-        quart.inverse();
-    }
 };
 
-#define REPEAT 10
-// eigen version
+#define REPEAT 300
 TEST_F(PerformanceTest, calcEigenCasualFloat)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcEigenCasualFloat();
+        auto dataMatrix = Eigen::MatrixXf::Map(g_floatData, 6, SAMPLE_COUNT / 6);
+        Eigen::MatrixXf quart = dataMatrix.adjoint() * dataMatrix;
+        quart.inverse();
     }
 }
 
@@ -55,6 +42,8 @@ TEST_F(PerformanceTest, calcEigenCasualDouble)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcEigenCasualDouble();
+        auto dataMatrix = Eigen::MatrixXd::Map(g_doubleData, 6, SAMPLE_COUNT / 6);
+        Eigen::MatrixXd quart = dataMatrix.adjoint() * dataMatrix;
+        quart.inverse();
     }
 }

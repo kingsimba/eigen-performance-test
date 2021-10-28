@@ -25,61 +25,15 @@ public:
             g_doubleData[i] = M_PI * (double)i / 100.0;
         }
     }
-
-
-// eigen version
-    void calcEigenSinFloat(){
-        auto data = Eigen::ArrayXf::Map(g_floatData,SAMPLE_COUNT);
-        data = data.sin();
-    }
-
-    void calcEigenSinDouble(){
-        auto data = Eigen::ArrayXd::Map(g_doubleData,SAMPLE_COUNT);
-        data = data.sin();
-    }
-
-    void calcEigenSqrtFloat(){
-        auto data = Eigen::ArrayXf::Map(g_floatData,SAMPLE_COUNT);
-        data = data.sqrt();
-    }
-
-    void calcEigenSqrtDouble(){
-        auto data = Eigen::ArrayXd::Map(g_doubleData,SAMPLE_COUNT);
-        data = data.sqrt();
-    }
-
-// Tranditional version
-    void calcTranditionalSinFloat(){
-        for(auto& d: g_floatData){
-            d = sinf(d);
-        }
-    }
-
-    void calcTranditionalSinDouble(){
-        for(auto& d: g_doubleData){
-            d = sin(d);
-        }
-    }
-
-    void calcTranditionalSqrtFloat(){
-        for(auto& d: g_floatData){
-            d = sqrtf(d);
-        }
-    }
-
-    void calcTranditionalSqrtDouble(){
-        for(auto& d: g_doubleData){
-            d = sqrt(d);
-        }
-    }
 };
 
-#define REPEAT 10
+#define REPEAT 10000
 TEST_F(PerformanceTest, calcEigenSinFloat)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcEigenSinFloat();
+        auto data = Eigen::ArrayXf::Map(g_floatData, SAMPLE_COUNT);
+        data = data.sin();
     }
 }
 
@@ -87,17 +41,19 @@ TEST_F(PerformanceTest, calcTranditionalSinFloat)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcTranditionalSinFloat();
+        for (auto& d : g_floatData)
+        {
+            d = sinf(d);
+        }
     }
 }
-
-
 
 TEST_F(PerformanceTest, calcEigenSinDouble)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcEigenSinDouble();
+        auto data = Eigen::ArrayXd::Map(g_doubleData, SAMPLE_COUNT);
+        data = data.sin();
     }
 }
 
@@ -105,7 +61,10 @@ TEST_F(PerformanceTest, calcTranditionalSinDouble)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcTranditionalSinDouble();
+        for (auto& d : g_doubleData)
+        {
+            d = sin(d);
+        }
     }
 }
 
@@ -113,7 +72,8 @@ TEST_F(PerformanceTest, calcEigenSqrtFloat)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcEigenSqrtFloat();
+        auto data = Eigen::ArrayXf::Map(g_floatData, SAMPLE_COUNT);
+        data = data.sqrt();
     }
 }
 
@@ -121,7 +81,10 @@ TEST_F(PerformanceTest, calcTranditionalSqrtFloat)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcTranditionalSqrtFloat();
+        for (auto& d : g_floatData)
+        {
+            d = sqrtf(d);
+        }
     }
 }
 
@@ -129,7 +92,8 @@ TEST_F(PerformanceTest, calcEigenSqrtDouble)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcEigenSqrtDouble();
+        auto data = Eigen::ArrayXd::Map(g_doubleData, SAMPLE_COUNT);
+        data = data.sqrt();
     }
 }
 
@@ -137,6 +101,9 @@ TEST_F(PerformanceTest, calcTranditionalSqrtDouble)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcTranditionalSqrtDouble();
+        for (auto& d : g_doubleData)
+        {
+            d = sqrt(d);
+        }
     }
 }
