@@ -22,7 +22,11 @@ endif()
 
 include_directories(include ${EIGEN3_INCLUDE_DIRS})
 
-file(GLOB SRC_FILES src/main.cpp src/eigen_unittest.cpp)
+file(GLOB SRC_FILES src/main.cpp 
+                    src/eigen_unittest.cpp 
+                    src/double_float_arithmetic_unittest.cpp
+                    src/double_float_less_then_unittest.cpp
+                    src/double_float_Eigen_unittest.cpp )
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 target_link_libraries(${PROJECT_NAME} PRIVATE GTest::gtest)
