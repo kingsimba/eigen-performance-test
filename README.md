@@ -1,6 +1,6 @@
-# Tests for understanding the performance of float vs double, or Eigen vs handcrafted code
+# My Performance Tests of Eigen
 
-## `eigen_unittest.cpp`
+## Eigen vs handcrafted code (`eigen_unittest.cpp`)
 
 Compare eigen with traditional way of calculating large amount of standard deviation
 
