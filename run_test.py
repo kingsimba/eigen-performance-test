@@ -52,14 +52,13 @@ def main():
     print(f"| {'-'*name_len} | {'-'*time_len} |")
 
     for suite in suites:
+        name = "**" + suite["name"] + "**"
+        time = "**" + suite["time"] + "**"
+        print(f"| {name:<{name_len}} | {time:>{time_len}} |")
         for s in suite["testsuite"]:
             name = s["name"]
             time = s["time"]
             print(f"| {name:<{name_len}} | {time:>{time_len}} |")
-
-        name = "**" + suite["name"] + "**"
-        time = "**" + suite["time"] + "**"
-        print(f"| {name:<{name_len}} | {time:>{time_len}} |")
 
 
 if __name__ == "__main__":

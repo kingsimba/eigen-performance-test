@@ -6,13 +6,14 @@ Some tests uses [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) l
 
 | Test                | Ryzen 4600G |
 | ------------------- | ----------- |
+| **EigenMatrix**     | **3.145s**  |
 | float               | 1.11s       |
 | double              | 2.035s      |
-| **EigenMatrix**     | **3.145s**  |
+| **FloatComparison** | **5.846s**  |
 | float2float         | 1.939s      |
 | float2double        | 1.957s      |
 | double2double       | 1.95s       |
-| **FloatComparison** | **5.846s**  |
+| **FloatTest**       | **21.843s** |
 | floatSin            | 2.205s      |
 | floatSinEigen       | 1.554s      |
 | doubleSin           | 6.601s      |
@@ -21,7 +22,6 @@ Some tests uses [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) l
 | floatSqrtEigen      | 0.307s      |
 | doubleSqrt          | 2.143s      |
 | doubleSqrtEigen     | 1.032s      |
-| **FloatTest**       | **21.843s** |
+| **StdDev**          | **2.866s**  |
 | traditional         | 2.472s      |
 | eigen               | 0.394s      |
-| **StdDev**          | **2.866s**  |
