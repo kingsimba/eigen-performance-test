@@ -1,13 +1,27 @@
 #include <gtest/gtest.h>
 #include <Eigen/Dense>
+#include <random>
 
 namespace
 {
 
+struct MatrixFloat
+{
+    float m[16];
+};
+
+struct MatrixDouble
+{
+    double m[16];
+};
+
 #define SAMPLE_COUNT 10000
 
-static float g_floatData[SAMPLE_COUNT];
-static double g_doubleData[SAMPLE_COUNT];
+MatrixFloat g_floatData[SAMPLE_COUNT];
+MatrixDouble g_doubleData[SAMPLE_COUNT];
+
+float g_floatResult = 0;
+float g_doubleResult = 0;
 
 } // namespace
 
@@ -16,25 +30,41 @@ class EigenMatrix : public ::testing::Test
 public:
     static void SetUpTestCase()
     {
+        std::random_device rd;
+        std::mt19937 e2(rd());
+
+        std::uniform_real_distribution<> dist(0, 10);
+
         for (size_t i = 0; i < SAMPLE_COUNT; i++)
         {
-            g_floatData[i] = (rand() + 1) * 0.0001f;
+            for (size_t j = 0; j < 16; j++)
+            {
+                g_floatData[i].m[j] = dist(e2);
+            }
         }
         for (size_t i = 0; i < SAMPLE_COUNT; i++)
         {
-            g_doubleData[i] = (rand() + 1) * 0.0001f;
+            for (size_t j = 0; j < 16; j++)
+            {
+                g_doubleData[i].m[j] = dist(e2);
+            }
         }
     }
+
+    static void TearDownTestCase() { printf("%f %f\n", g_floatResult, g_doubleResult); }
 };
 
-#define REPEAT 300
+#define REPEAT 6000
 TEST_F(EigenMatrix, float)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        auto dataMatrix = Eigen::MatrixXf::Map(g_floatData, 6, SAMPLE_COUNT / 6);
-        Eigen::MatrixXf quart = dataMatrix.adjoint() * dataMatrix;
-        quart.inverse();
+        for (size_t j = 0; j < SAMPLE_COUNT; j++)
+        {
+            auto dataMatrix = Eigen::Matrix4f::Map(&g_floatData[j].m[0], 4, 4);
+            Eigen::Matrix4f quart = dataMatrix.adjoint() * dataMatrix;
+            g_floatResult += quart.inverse().sum();
+        }
     }
 }
 
@@ -42,8 +72,11 @@ TEST_F(EigenMatrix, double)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        auto dataMatrix = Eigen::MatrixXd::Map(g_doubleData, 6, SAMPLE_COUNT / 6);
-        Eigen::MatrixXd quart = dataMatrix.adjoint() * dataMatrix;
-        quart.inverse();
+        for (size_t j = 0; j < SAMPLE_COUNT; j++)
+        {
+            auto dataMatrix = Eigen::Matrix4d::Map(&g_doubleData[j].m[0], 4, 4);
+            Eigen::Matrix4d quart = dataMatrix.adjoint() * dataMatrix;
+            g_doubleResult += quart.inverse().sum();
+        }
     }
 }

@@ -7,8 +7,8 @@ Some tests uses [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) l
 | Test                | Ryzen 4600G |
 | ------------------- | ----------- |
 | **EigenMatrix**     | **3.145s**  |
-| float               | 1.11s       |
-| double              | 2.035s      |
+| float               | 1.166s      |
+| double              | 1.424s      |
 | **FloatComparison** | **5.846s**  |
 | float2float         | 1.939s      |
 | float2double        | 1.957s      |
