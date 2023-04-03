@@ -25,7 +25,7 @@ include_directories(include ${EIGEN3_INCLUDE_DIRS})
 file(GLOB SRC_FILES src/main.cpp 
                     src/stddev_unittest.cpp
                     src/float_comparison_unittest.cpp
-                    src/float_computation_unittest.cpp
+                    src/float_arithmetic_unittest.cpp
                     src/eigen_matrix_unittest.cpp )
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})

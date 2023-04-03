@@ -11,7 +11,7 @@ static double g_doubleData[SAMPLE_COUNT];
 
 } // namespace
 
-class FloatTest : public ::testing::Test
+class FloatArithmetic : public ::testing::Test
 {
 public:
     static void SetUpTestCase()
@@ -29,7 +29,7 @@ public:
 
 #define REPEAT 10000
 
-TEST_F(FloatTest, floatSin)
+TEST_F(FloatArithmetic, floatSin)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -40,7 +40,7 @@ TEST_F(FloatTest, floatSin)
     }
 }
 
-TEST_F(FloatTest, floatSinEigen)
+TEST_F(FloatArithmetic, floatSinEigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -49,7 +49,7 @@ TEST_F(FloatTest, floatSinEigen)
     }
 }
 
-TEST_F(FloatTest, doubleSin)
+TEST_F(FloatArithmetic, doubleSin)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -60,7 +60,7 @@ TEST_F(FloatTest, doubleSin)
     }
 }
 
-TEST_F(FloatTest, doubleSinEigen)
+TEST_F(FloatArithmetic, doubleSinEigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -69,7 +69,7 @@ TEST_F(FloatTest, doubleSinEigen)
     }
 }
 
-TEST_F(FloatTest, floatSqrt)
+TEST_F(FloatArithmetic, floatSqrt)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -80,7 +80,7 @@ TEST_F(FloatTest, floatSqrt)
     }
 }
 
-TEST_F(FloatTest, floatSqrtEigen)
+TEST_F(FloatArithmetic, floatSqrtEigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -89,7 +89,7 @@ TEST_F(FloatTest, floatSqrtEigen)
     }
 }
 
-TEST_F(FloatTest, doubleSqrt)
+TEST_F(FloatArithmetic, doubleSqrt)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -100,7 +100,7 @@ TEST_F(FloatTest, doubleSqrt)
     }
 }
 
-TEST_F(FloatTest, doubleSqrtEigen)
+TEST_F(FloatArithmetic, doubleSqrtEigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
