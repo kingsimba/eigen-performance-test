@@ -46,7 +46,7 @@ public:
                   << g_outputData[0].az << std::endl;
     }
 
-    void calcStdvEigen()
+    float calcStdvEigen()
     {
         auto dataMatrix = Eigen::MatrixXf::Map((float*)g_inputData, 6, SAMPLE_COUNT);
         Eigen::MatrixXf ag_mean = Eigen::MatrixXf::Zero(6, OUTPUT_COUNT);
@@ -63,10 +63,14 @@ public:
         }
         agStdv /= static_cast<float>(OUTPUT_COUNT);
         agStdv = agStdv.sqrt();
+
+        return agStdv.sum();
     }
 
-    void calcStdvTraditional()
+    float calcStdvTraditional()
     {
+        float sum = 0;
+
         for (size_t i = 0; i < countof(g_outputData); i++)
         {
             Data& output = g_outputData[i];
@@ -76,7 +80,11 @@ public:
             output.gx = _calculateStdv(&g_inputData[i].gx, OUTPUT_COUNT);
             output.gy = _calculateStdv(&g_inputData[i].gy, OUTPUT_COUNT);
             output.gz = _calculateStdv(&g_inputData[i].gz, OUTPUT_COUNT);
+
+            sum += output.ax + output.ay + output.az + output.gx + output.gy + output.gz;
         }
+
+        return sum;
     }
 
     float _calculateStdv(float* start, int sampleCount)
@@ -104,16 +112,21 @@ public:
 
 TEST_F(StdDev, eigen)
 {
+    float result = 0;
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcStdvEigen();
+        result += calcStdvEigen();
     }
+
+    printf("sum = %f\n", result);
 }
 
 TEST_F(StdDev, traditional)
 {
+    float result = 0;
     for (size_t i = REPEAT; i != 0; i--)
     {
-        calcStdvTraditional();
+        result += calcStdvTraditional();
     }
+    printf("sum = %f\n", result);
 }
