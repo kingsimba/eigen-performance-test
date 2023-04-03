@@ -9,9 +9,11 @@ namespace
 static float g_floatData[SAMPLE_COUNT];
 static double g_doubleData[SAMPLE_COUNT];
 
+volatile bool g_result = false;
+
 } // namespace
 
-class ComparisonTest : public ::testing::Test
+class FloatComparison : public ::testing::Test
 {
 public:
     static void SetUpTestCase()
@@ -25,50 +27,43 @@ public:
             g_doubleData[i] = (rand() + 1) * 0.0001f;
         }
     }
+
+    void SetUp() { g_result = false; }
+
+    void TearDown() { printf("%d", g_result); }
 };
 
 #define REPEAT 300000
 
-TEST_F(ComparisonTest, cmpLessFloatFloat)
+TEST_F(FloatComparison, float2float)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        for (int idx = 0; idx < SAMPLE_COUNT; ++idx)
+        for (int idx = 1; idx < SAMPLE_COUNT; ++idx)
         {
-            g_floatData[idx] = g_floatData[idx] < 100.0f;
+            g_result ^= g_floatData[idx] < g_floatData[idx - 1];
         }
     }
 }
 
-TEST_F(ComparisonTest, cmpLessFloatDouble)
+TEST_F(FloatComparison, float2double)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        for (int idx = 0; idx < SAMPLE_COUNT; ++idx)
+        for (int idx = 1; idx < SAMPLE_COUNT; ++idx)
         {
-            g_doubleData[idx] = g_doubleData[idx] < 100.0;
+            g_result ^= g_floatData[idx] < g_doubleData[idx - 1];
         }
     }
 }
 
-TEST_F(ComparisonTest, cmpLessDoubleDouble)
+TEST_F(FloatComparison, double2double)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        for (int idx = 0; idx < SAMPLE_COUNT; ++idx)
+        for (int idx = 1; idx < SAMPLE_COUNT; ++idx)
         {
-            g_doubleData[idx] = g_doubleData[idx] < 100.0;
-        }
-    }
-}
-
-TEST_F(ComparisonTest, cmpLessDoubleFloat)
-{
-    for (size_t i = REPEAT; i != 0; i--)
-    {
-        for (int idx = 0; idx < SAMPLE_COUNT; ++idx)
-        {
-            g_doubleData[idx] = g_doubleData[idx] < 100.0f;
+            g_result ^= g_doubleData[idx] < g_doubleData[idx - 1];
         }
     }
 }

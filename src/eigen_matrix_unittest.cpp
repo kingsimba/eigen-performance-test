@@ -11,7 +11,7 @@ static double g_doubleData[SAMPLE_COUNT];
 
 } // namespace
 
-class PerformanceTest : public ::testing::Test
+class EigenMatrix : public ::testing::Test
 {
 public:
     static void SetUpTestCase()
@@ -28,7 +28,7 @@ public:
 };
 
 #define REPEAT 300
-TEST_F(PerformanceTest, calcEigenCasualFloat)
+TEST_F(EigenMatrix, float)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -38,7 +38,7 @@ TEST_F(PerformanceTest, calcEigenCasualFloat)
     }
 }
 
-TEST_F(PerformanceTest, calcEigenCasualDouble)
+TEST_F(EigenMatrix, double)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {

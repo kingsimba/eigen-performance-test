@@ -11,7 +11,7 @@ static double g_doubleData[SAMPLE_COUNT];
 
 } // namespace
 
-class PerformanceTest : public ::testing::Test
+class FloatTest : public ::testing::Test
 {
 public:
     static void SetUpTestCase()
@@ -28,16 +28,8 @@ public:
 };
 
 #define REPEAT 10000
-TEST_F(PerformanceTest, calcEigenSinFloat)
-{
-    for (size_t i = REPEAT; i != 0; i--)
-    {
-        auto data = Eigen::ArrayXf::Map(g_floatData, SAMPLE_COUNT);
-        data = data.sin();
-    }
-}
 
-TEST_F(PerformanceTest, calcTranditionalSinFloat)
+TEST_F(FloatTest, floatSin)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -48,16 +40,16 @@ TEST_F(PerformanceTest, calcTranditionalSinFloat)
     }
 }
 
-TEST_F(PerformanceTest, calcEigenSinDouble)
+TEST_F(FloatTest, floatSinEigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        auto data = Eigen::ArrayXd::Map(g_doubleData, SAMPLE_COUNT);
+        auto data = Eigen::ArrayXf::Map(g_floatData, SAMPLE_COUNT);
         data = data.sin();
     }
 }
 
-TEST_F(PerformanceTest, calcTranditionalSinDouble)
+TEST_F(FloatTest, doubleSin)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -68,16 +60,16 @@ TEST_F(PerformanceTest, calcTranditionalSinDouble)
     }
 }
 
-TEST_F(PerformanceTest, calcEigenSqrtFloat)
+TEST_F(FloatTest, doubleSinEigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        auto data = Eigen::ArrayXf::Map(g_floatData, SAMPLE_COUNT);
-        data = data.sqrt();
+        auto data = Eigen::ArrayXd::Map(g_doubleData, SAMPLE_COUNT);
+        data = data.sin();
     }
 }
 
-TEST_F(PerformanceTest, calcTranditionalSqrtFloat)
+TEST_F(FloatTest, floatSqrt)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -88,16 +80,16 @@ TEST_F(PerformanceTest, calcTranditionalSqrtFloat)
     }
 }
 
-TEST_F(PerformanceTest, calcEigenSqrtDouble)
+TEST_F(FloatTest, floatSqrtEigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
-        auto data = Eigen::ArrayXd::Map(g_doubleData, SAMPLE_COUNT);
+        auto data = Eigen::ArrayXf::Map(g_floatData, SAMPLE_COUNT);
         data = data.sqrt();
     }
 }
 
-TEST_F(PerformanceTest, calcTranditionalSqrtDouble)
+TEST_F(FloatTest, doubleSqrt)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -105,5 +97,14 @@ TEST_F(PerformanceTest, calcTranditionalSqrtDouble)
         {
             d = sqrt(d);
         }
+    }
+}
+
+TEST_F(FloatTest, doubleSqrtEigen)
+{
+    for (size_t i = REPEAT; i != 0; i--)
+    {
+        auto data = Eigen::ArrayXd::Map(g_doubleData, SAMPLE_COUNT);
+        data = data.sqrt();
     }
 }
