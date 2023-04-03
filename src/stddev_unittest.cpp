@@ -23,7 +23,7 @@ static Data g_outputData[OUTPUT_COUNT];
 
 } // namespace
 
-class ZeroDetectTest : public ::testing::Test
+class StdDev : public ::testing::Test
 {
 public:
     static void SetUpTestCase()
@@ -100,9 +100,9 @@ public:
     }
 };
 
-#define REPEAT 10000
+#define REPEAT 30000
 
-TEST_F(ZeroDetectTest, eigen)
+TEST_F(StdDev, eigen)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {
@@ -110,7 +110,7 @@ TEST_F(ZeroDetectTest, eigen)
     }
 }
 
-TEST_F(ZeroDetectTest, traditional)
+TEST_F(StdDev, traditional)
 {
     for (size_t i = REPEAT; i != 0; i--)
     {

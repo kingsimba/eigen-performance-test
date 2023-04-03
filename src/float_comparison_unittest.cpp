@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <random>
 #include <Eigen/Dense>
 
 namespace
@@ -18,13 +19,18 @@ class FloatComparison : public ::testing::Test
 public:
     static void SetUpTestCase()
     {
+        std::random_device rd;
+        std::mt19937 e2(rd());
+
+        std::uniform_real_distribution<> dist(0, 10);
+
         for (size_t i = 0; i < SAMPLE_COUNT; i++)
         {
-            g_floatData[i] = (rand() + 1) * 0.0001f;
+            g_floatData[i] = dist(e2);
         }
         for (size_t i = 0; i < SAMPLE_COUNT; i++)
         {
-            g_doubleData[i] = (rand() + 1) * 0.0001f;
+            g_doubleData[i] = dist(e2);
         }
     }
 
@@ -33,7 +39,7 @@ public:
     void TearDown() { printf("%d", g_result); }
 };
 
-#define REPEAT 300000
+#define REPEAT 10000
 
 TEST_F(FloatComparison, float2float)
 {

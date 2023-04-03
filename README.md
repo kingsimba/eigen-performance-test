@@ -1,27 +1,27 @@
-# My Performance Tests of Eigen
+# Float Performance Tests
 
-## Eigen vs handcrafted code (`eigen_unittest.cpp`)
+This project contains some tests of float point arithmetic and comparison.
 
-Compare eigen with traditional way of calculating large amount of standard deviation
+Some tests uses [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) library.
 
-| Test                      | Ryzen 4600G |
-| ------------------------- | ----------- |
-| calcEigenCasualFloat      | 0.919s      |
-| calcEigenCasualDouble     | 1.767s      |
-| calcEigenSinFloat         | 1.553s      |
-| calcTraditionalSinFloat   | 2.383s      |
-| calcEigenSinDouble        | 6.097s      |
-| calcTraditionalSinDouble  | 6.153s      |
-| calcEigenSqrtFloat        | 0.317s      |
-| calcTraditionalSqrtFloat  | 1.323s      |
-| calcEigenSqrtDouble       | 1.035s      |
-| calcTraditionalSqrtDouble | 2.14s       |
-| **PerformanceTest**       | **23.688s** |
-| cmpLessFloatFloat         | 0.952s      |
-| cmpLessFloatDouble        | 2.076s      |
-| cmpLessDoubleDouble       | 2.091s      |
-| cmpLessDoubleFloat        | 2.005s      |
-| **ComparisonTest**        | **7.124s**  |
-| eigen                     | 0.132s      |
-| traditional               | 0.817s      |
-| **ZeroDetectTest**        | **0.949s**  |
+| Test                | Ryzen 4600G |
+| ------------------- | ----------- |
+| float               | 1.11s       |
+| double              | 2.035s      |
+| **EigenMatrix**     | **3.145s**  |
+| float2float         | 1.939s      |
+| float2double        | 1.957s      |
+| double2double       | 1.95s       |
+| **FloatComparison** | **5.846s**  |
+| floatSin            | 2.205s      |
+| floatSinEigen       | 1.554s      |
+| doubleSin           | 6.601s      |
+| doubleSinEigen      | 6.664s      |
+| floatSqrt           | 1.337s      |
+| floatSqrtEigen      | 0.307s      |
+| doubleSqrt          | 2.143s      |
+| doubleSqrtEigen     | 1.032s      |
+| **FloatTest**       | **21.843s** |
+| traditional         | 2.472s      |
+| eigen               | 0.394s      |
+| **StdDev**          | **2.866s**  |
