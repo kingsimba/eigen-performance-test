@@ -6,8 +6,8 @@ namespace
 
 #define SAMPLE_COUNT 100000
 
-static float g_floatData[SAMPLE_COUNT];
-static double g_doubleData[SAMPLE_COUNT];
+float g_floatData[SAMPLE_COUNT];
+double g_doubleData[SAMPLE_COUNT];
 
 } // namespace
 
@@ -24,6 +24,22 @@ public:
         {
             g_doubleData[i] = M_PI * (double)i / 100.0;
         }
+    }
+
+    static void TearDownTestCase()
+    {
+        uint32_t* floatResult = (uint32_t*)&g_floatData[0];
+        uint64_t* doubleResult = (uint64_t*)&g_doubleData[0];
+
+        uint32_t a = 0;
+        uint64_t b = 0;
+        for (size_t i = 0; i < SAMPLE_COUNT; i++)
+        {
+            a ^= floatResult[i];
+            b ^= doubleResult[i];
+        }
+
+        printf("%u %lu\n", a, b);
     }
 };
 
